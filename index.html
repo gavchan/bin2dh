@@ -20,7 +20,7 @@
     </style>
 </head>
 <body>
-    <h1>Bin2DH</h1>
+    <h1>Binary to Decimal/Hexadecimal</h1>
     <div id="out">
         Enter binary number to convert to decimal and hexadecimal
     </div>
@@ -33,7 +33,22 @@
         }
 
         var dec2hex = function(dec) {
-           return dec.toString(16);
+            var out = dec.toString(16);
+            // Pad a 0 to the beginning if odd number of hexadecimals
+            if (out.length % 2 !== 0) {
+                out = "0" + out;
+            }
+            return out;
+        }
+
+        var spacestr = function(str, numchars, offset) {
+            var idx = offset;
+            var out = "";
+            while (idx < str.length) {
+                out += str.substring(idx, idx + numchars) + " ";
+                idx += numchars;
+            }
+            return out;
         }
 
         var prettybin = function(str, bits) {
@@ -54,15 +69,10 @@
                 out += '<span class="pad">' + pad + '</span>';
                 out += str.substring(0, offset) + " ";
                 idx = offset;
-                console.log(out,idx);
             } 
             // Add spaces after specified number of bits
-            while (idx < str.length) {
-                out += str.substring(idx, idx + bits) + " ";
-                idx += bits;
-                console.log(out, idx);
-            }
-            document.getElementById('out').innerHTML = out;
+           out += spacestr(str, bits, idx);
+           document.getElementById('out').innerHTML = out;
         }
         var convertOut = function(str) {
             var dec;
@@ -72,8 +82,8 @@
             } else {
                 prettybin(str, 4);
                 dec = bin2dec(str);
-                document.getElementById('conv').innerHTML = "Decimal:<br>" + dec +
-            '<br>Hexadecimal:<br><span class="pad">0x</span>' + dec2hex(dec); 
+                document.getElementById('conv').innerHTML = "Decimal:<br>" + spacestr(dec.toString(), 3, 0) +
+            '<br><br>Hexadecimal:<br><span class="pad">0x</span>' + spacestr(dec2hex(dec), 2, 0); 
             }
         };
 
