@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Binary 2 Decimal/Hexadecimal</title>
+</head>
+<body>
+    <h1>Bin2DH</h1>
+    <div id="out">
+        Enter binary number to convert to decimal and hexadecimal.<br>
+        Press <backspace> to edit, <escape> to clear.
+    </div>
+    <script>
+        var str = "";
+        window.addEventListener('keydown', function(e) {
+            switch(e.key) {
+                case "0":
+                case "1":
+                    str += e.key;
+                    break;
+                case "Backspace":
+                    console.log("Backspace");
+                    str = str.substring(0, str.length - 1);
+                    break;
+                case "Escape":
+                    console.log("Escape");
+                    str = "";
+                    break;
+                default:
+                    break;
+            }
+            console.log(str);
+        });
+    </script>
+</body>
+</html>
