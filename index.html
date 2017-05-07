@@ -14,6 +14,9 @@
         #conv {
             padding-top: 10px;
         }
+        .pad {
+            color: #bbb;
+        }
     </style>
 </head>
 <body>
@@ -33,16 +36,44 @@
            return dec.toString(16);
         }
 
+        var prettybin = function(str, bits) {
+            // Determine number of 0s to pad based on specified bits
+            var offset = str.length % bits;
+            var padnum = bits - offset;
+            var pad = "";
+
+            // Pad with 0s if modulus of string length less than specified number of bits
+            if (padnum < bits) {
+                for (i = 0; i < padnum; i++) {
+                    pad += "0";
+                }
+            }
+            var idx = 0;
+            var out = "";
+            if (offset > 0) {
+                out += '<span class="pad">' + pad + '</span>';
+                out += str.substring(0, offset) + " ";
+                idx = offset;
+                console.log(out,idx);
+            } 
+            // Add spaces after specified number of bits
+            while (idx < str.length) {
+                out += str.substring(idx, idx + bits) + " ";
+                idx += bits;
+                console.log(out, idx);
+            }
+            document.getElementById('out').innerHTML = out;
+        }
         var convertOut = function(str) {
             var dec;
             if (str == "") {
                 document.getElementById('out').innerHTML = "Enter binary number to convert to decimal and hexadecimal";
                 document.getElementById('conv').innerHTML = "Press &lt;backspace&gt; to edit, &lt;escape&gt; to clear";
             } else {
-                document.getElementById('out').innerHTML = str;
+                prettybin(str, 4);
                 dec = bin2dec(str);
                 document.getElementById('conv').innerHTML = "Decimal:<br>" + dec +
-            "<br>Hexadecimal:<br>0x " + dec2hex(dec); 
+            '<br>Hexadecimal:<br><span class="pad">0x</span>' + dec2hex(dec); 
             }
         };
 
