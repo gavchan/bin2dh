@@ -2,14 +2,49 @@
 <html lang="en">
 <head>
     <title>Binary 2 Decimal/Hexadecimal</title>
+    <style type="text/css">
+        h1, #out, #conv {
+            text-align: center;
+            font-family: sans-serif;
+            font-weight: bold;
+        }
+        #out {
+            font-size: 1.4em;
+        }
+        #conv {
+            padding-top: 10px;
+        }
+    </style>
 </head>
 <body>
     <h1>Bin2DH</h1>
     <div id="out">
-        Enter binary number to convert to decimal and hexadecimal.<br>
-        Press <backspace> to edit, <escape> to clear.
+        Enter binary number to convert to decimal and hexadecimal
+    </div>
+    <div id="conv">
+        Press &lt;backspace&gt; to edit, &lt;escape&gt; to clear
     </div>
     <script>
+        var bin2dec = function(str) {
+            return str;
+        }
+
+        var bin2hex = function(str) {
+            return str;
+        }
+
+        var convertOut = function(str) {
+            if (str == "") {
+                document.getElementById('out').innerHTML = "Enter binary number to convert";
+                document.getElementById('conv').innerHTML = "Press &lt;backspace&gt; to edit, &lt;escape&gt; to clear";
+            } else {
+                document.getElementById('out').innerHTML = str;
+                document.getElementById('conv').innerHTML = "Decimal:<br>" + bin2dec(str) +
+            "<br>Hexadecimal:<br>" + bin2hex(str); 
+                console.log(str);
+            }
+        };
+
         var str = "";
         window.addEventListener('keydown', function(e) {
             switch(e.key) {
@@ -28,7 +63,7 @@
                 default:
                     break;
             }
-            console.log(str);
+           convertOut(str);
         });
     </script>
 </body>
