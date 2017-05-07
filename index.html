@@ -26,22 +26,23 @@
     </div>
     <script>
         var bin2dec = function(str) {
-            return str;
+            return parseInt(str,2);
         }
 
-        var bin2hex = function(str) {
-            return str;
+        var dec2hex = function(dec) {
+           return dec.toString(16);
         }
 
         var convertOut = function(str) {
+            var dec;
             if (str == "") {
-                document.getElementById('out').innerHTML = "Enter binary number to convert";
+                document.getElementById('out').innerHTML = "Enter binary number to convert to decimal and hexadecimal";
                 document.getElementById('conv').innerHTML = "Press &lt;backspace&gt; to edit, &lt;escape&gt; to clear";
             } else {
                 document.getElementById('out').innerHTML = str;
-                document.getElementById('conv').innerHTML = "Decimal:<br>" + bin2dec(str) +
-            "<br>Hexadecimal:<br>" + bin2hex(str); 
-                console.log(str);
+                dec = bin2dec(str);
+                document.getElementById('conv').innerHTML = "Decimal:<br>" + dec +
+            "<br>Hexadecimal:<br>0x " + dec2hex(dec); 
             }
         };
 
@@ -53,11 +54,9 @@
                     str += e.key;
                     break;
                 case "Backspace":
-                    console.log("Backspace");
                     str = str.substring(0, str.length - 1);
                     break;
                 case "Escape":
-                    console.log("Escape");
                     str = "";
                     break;
                 default:
